@@ -24,7 +24,9 @@ jobs:
     needs: determine-container
     steps:
       - name: Download server
-        run: wget -O /usr/local/ezproxy/ezproxy https://help.oclc.org/@api/deki/files/9850/ezproxy-linux.bin
+        run: | 
+          mkdir -p /usr/local/ezproxy
+          wget -O /usr/local/ezproxy/ezproxy https://help.oclc.org/@api/deki/files/9850/ezproxy-linux.bin
       - name: Check version
         id: version
         run: |
