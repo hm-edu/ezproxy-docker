@@ -25,10 +25,10 @@ jobs:
     steps:
       - name: Download server
         run: | 
-          mkdir -p /usr/local/ezproxy
-          wget -O /usr/local/ezproxy/ezproxy https://help.oclc.org/@api/deki/files/9850/ezproxy-linux.bin
+          wget -O ezproxy https://help.oclc.org/@api/deki/files/9850/ezproxy-linux.bin
+          chmod +x ezproxy
       - name: Check version
         id: version
         run: |
-          VERSION="$(/usr/local/ezproxy/ezproxy -v | grep -oP "EZproxy \d+\.\d+\.\d+" | tr -d '\n')"
+          VERSION="$(ezproxy -v | grep -oP "EZproxy \d+\.\d+\.\d+" | tr -d '\n')"
           echo "name=ezproxy_version::$VERSION" >> $GITHUB_OUTPUT
