@@ -11,9 +11,22 @@ jobs:
     container: 
       image: ghcr.io/hm-edu/ezproxy-docker:main
       options: "--entrypoint /bin/bash"
+    outputs:
+      version: ${{ steps.version.outputs.ezproxy_version }}
     steps:
       - name: Check version
         id: version
         run: |
           VERSION="$(/usr/local/ezproxy/ezproxy -v)"
-          echo "::set-output name=ezproxy_version::$VERSION"
+          echo "name=ezproxy_version::$VERSION" >> $GITHUB_OUTPUT
+  determine-server:
+    runs-on: ubuntu-latest
+    needs: determine-container
+    steps:
+      - name: Download server
+        run: wget -O /usr/local/ezproxy/ezproxy https://help.oclc.org/@api/deki/files/9850/ezproxy-linux.bin
+      - name: Check version
+        id: version
+        run: |
+          VERSION="$(/usr/local/ezproxy/ezproxy -v)"
+          echo "name=ezproxy_version::$VERSION" >> $GITHUB_OUTPUT
