@@ -9,6 +9,8 @@ jobs:
   determine-server:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Download server
         run: | 
           wget -O ezproxy https://help.oclc.org/@api/deki/files/9850/ezproxy-linux.bin
