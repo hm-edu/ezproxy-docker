@@ -18,7 +18,7 @@ jobs:
       - name: Check version
         id: version
         run: |
-          VERSION="$(ezproxy -v | grep -oP "EZproxy \d+\.\d+\.\d+" | tr -d '\n')"
+          VERSION="$(./ezproxy -v | grep -oP "EZproxy \d+\.\d+\.\d+" | tr -d '\n')"
           echo "name=ezproxy_version::$VERSION" >> $GITHUB_OUTPUT
           echo $VERSION > VERSION
       - name: Create Pull Request
