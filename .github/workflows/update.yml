@@ -1,0 +1,19 @@
+name: update-proxy
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  determine-container:
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/hm-edu/ezproxy-docker:main
+      options: "--entrypoint /bin/bash"
+    steps:
+      - name: Check version
+        id: version
+        run: |
+          VERSION="$(/usr/local/ezproxy/ezproxy -v)"
+          echo "::set-output name=ezproxy_version::$VERSION"
