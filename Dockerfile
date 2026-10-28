@@ -1,4 +1,4 @@
-FROM debian:12.15@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+FROM debian:13.7@sha256:2dc419c6d7fe3dad0a2f9fd469c34cc90b0f9ba642d8fde837fe3d7d34a0e7f1
 
 RUN apt-get update \
   && apt-get -y install --no-install-recommends wget ca-certificates\
